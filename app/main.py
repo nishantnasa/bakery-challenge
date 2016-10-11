@@ -60,9 +60,8 @@ class Order:
                 'qty': order_qty,
                 'total_cost': round(total_cost, 2)
             }
-        if printing == True:
+        if printing is True:
             self.__print_order()
-
 
     def __get_order_qty(self, packs, user_qty):
         """
@@ -89,7 +88,6 @@ class Order:
             queue.append(pack)
 
         return {q: queue.count(q) for q in queue}
-
 
     def __min_packs(self, packs, user_qty):
         """
@@ -130,7 +128,6 @@ class Order:
 
         return min_order_pack_idx
 
-
     def __get_order_cost(self, order_qty, pack_costs):
         """
         Returns the total_cost of order
@@ -141,7 +138,6 @@ class Order:
             total_cost += qty * pack_costs[pack]
 
         return total_cost
-
 
     def __print_order(self):
         """
@@ -156,10 +152,12 @@ class Order:
                     print "\t %(pkq)s x %(pk)s $%(pkuc)s" % {'pkq': pack_qty, 'pk': pack, 'pkuc': pack_unit_cost}
 
 
+# This function supports running the application
 def get_user_qty(message):
     """
     Error handling for invalid user inputs for quantity 
     """
+    user_qty_input = 0
     while True:
         try:
             user_qty_input = int(raw_input(message))
@@ -178,10 +176,10 @@ if __name__ == '__main__':
         'CF': {3: 5.95, 5: 9.95, 9: 16.99}
     }
     user_product_qty = {
-                'VS5': get_user_qty("How many Vegemite Scrolls you want? "),
-                'MB11': get_user_qty("How many Blueberry muffins you want? "),
-                'CF': get_user_qty("How many Croissants you want? ")
-                }
+        'VS5': get_user_qty("How many Vegemite Scrolls you want? "),
+        'MB11': get_user_qty("How many Blueberry muffins you want? "),
+        'CF': get_user_qty("How many Croissants you want? ")
+    }
 
     order = Order()
     order.all_products_packs = all_products_packs
